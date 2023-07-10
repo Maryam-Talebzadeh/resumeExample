@@ -1,0 +1,187 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #000033;
+    --tab-width: 240px;
+    --button-width: 80px;
+}
+
+body {
+    margin: 0;
+    font-family: "Euclid Circular A";
+}
+
+section {
+    padding: 30px 15%;
+}
+
+@media (width <= 720px) {
+    section {
+        padding: 30px 10%;
+    }
+}
+
+.banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: space-between;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    min-height: 40vw;
+    margin-bottom: 40px;
+}
+
+@media (width <= 620px) {
+    .banner {
+        text-align: center;
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 200%;
+    height: 120%;
+    background:#000033;
+}
+
+.banner h2 {
+    white-space: nowrap;
+    margin: 0 0 4px;
+    font-size: 40px;
+    color: rgb(255 255 255 / 96%);
+}
+
+
+
+@keyframes morph {
+    0%,
+    100% {
+        border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+    }
+    34% {
+        border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+    }
+    67% {
+        border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+    }
+}
+
+.banner img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    animation: morph 3.5s linear infinite;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--tab-width);
+    background: #737373;
+    opacity:0.8;
+}
+
+input {
+    display: none;
+}
+
+h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.content {
+    position: relative;
+    overflow: hidden;
+    height: 140px;
+}
+
+.content-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: calc(var(--tab-width) * 3);
+    transition: 0.3s;
+}
+
+.content-inner > div {
+    width: inherit;
+    padding: 20px;
+}
+
+label {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 15px;
+    width: var(--button-width);
+    opacity: 0.35;
+    cursor: pointer;
+}
+
+p {
+    margin: 0;
+    font-size: 14px;
+    color: #1a1a1a;
+}
+
+.buttons {
+    position: relative;
+    display: flex;
+    border-bottom: 1px solid #ffffff;
+}
+
+.underline {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: var(--button-width);
+    height: 3px;
+    background: var(--color-primary);
+    transition: 0.2s;
+}
+
+.tabs input:nth-child(1):checked ~ .buttons .underline {
+    translate: 0 0;
+}
+
+.tabs input:nth-child(2):checked ~ .buttons .underline {
+    translate: var(--button-width) 0;
+}
+
+.tabs input:nth-child(3):checked ~ .buttons .underline {
+    translate: calc(var(--button-width) * 2) 0;
+}
+
+.tabs input:nth-child(1):checked ~ .buttons label:nth-child(1),
+.tabs input:nth-child(2):checked ~ .buttons label:nth-child(2),
+.tabs input:nth-child(3):checked ~ .buttons label:nth-child(3) {
+    opacity: 1;
+}
+
+.tabs input:nth-child(1):checked ~ .content > .content-inner {
+    translate: 0 0;
+}
+
+.tabs input:nth-child(2):checked ~ .content > .content-inner {
+    translate: calc(0px - var(--tab-width)) 0;
+}
+
+.tabs input:nth-child(3):checked ~ .content > .content-inner {
+    translate: calc(0px - var(--tab-width) * 2) 0;
+}
